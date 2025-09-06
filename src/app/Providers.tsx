@@ -2,9 +2,8 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@emotion/react';
-import { theme } from '@/styles/theme';
 import { Global } from '@emotion/react';
-import { globalStyles } from '@/styles/globalStyles';
+import { globalStyles, theme } from '@styles';
 import { useState } from 'react';
 
 export function Providers({ children }: { children: React.ReactNode }) {

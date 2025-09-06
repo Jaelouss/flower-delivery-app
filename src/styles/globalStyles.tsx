@@ -20,7 +20,7 @@ export const globalStyles = css`
 		margin: 0;
 		background: ${theme.colors.bg};
 		color: ${theme.colors.dark};
-		line-height: 1.5;
+		line-height: normal;
 		min-height: 100vh;
 		padding-inline: ${theme.spacing(10.5)};
 	}
