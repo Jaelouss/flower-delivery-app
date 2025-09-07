@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { relative } from "path";
-import { AlignItems, JustifyContent } from "../mixins";
+import type { AlignItems, JustifyContent } from "../mixins";
 
 interface BoxProps {
 	column?: boolean;
@@ -22,6 +21,7 @@ interface BoxProps {
 	bottom?: string;
 	left?: string;
 	cursor?: string;
+	background?: string;
 	children?: React.ReactNode;
 }
 
@@ -45,4 +45,5 @@ export const Box = styled.div<BoxProps>`
 	bottom: ${({ bottom }) => bottom || "auto"};
 	left: ${({ left }) => left || "auto"};
 	cursor: ${({ cursor }) => cursor || "default"};
+	background:${({ background }) => background || "transparent"};
 `;

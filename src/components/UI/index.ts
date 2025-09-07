@@ -1,3 +1,4 @@
+export { CouponCard } from "./Cards/CouponCard";
 export { MainFlowerCard } from "./Cards/MainFlowerCard";
 export { ProductCard } from "./Cards/ProductCard";
 export { CartBadge } from "./CartBadge/CartBadge";

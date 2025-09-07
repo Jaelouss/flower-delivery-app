@@ -1,17 +1,31 @@
 "use client";
 
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Box } from "@styles";
+import dynamic from "next/dynamic";
+import React from "react";
 
-export const FlowerLoader = () => {
-	return (
-		<Box padding='8px'>
-			<DotLottieReact
-				src='/loader/loading.lottie'
-				loop
-				autoplay
-				style={{ width: 750, height: 750 }}
-			/>
-		</Box>
-	);
-};
+const DotLottieReact = dynamic(
+	() =>
+		import("@lottiefiles/dotlottie-react").then((mod) => mod.DotLottieReact),
+	{ ssr: false },
+);
+
+interface FlowerLoaderProps {
+	width?: number;
+	height?: number;
+}
+
+export const FlowerLoader: React.FC<FlowerLoaderProps> = React.memo(
+	({ width = 500, height = 500 }) => {
+		return (
+			<Box padding='8px'>
+				<DotLottieReact
+					src='/loader/loading.lottie'
+					loop
+					autoplay
+					style={{ width, height }}
+				/>
+			</Box>
+		);
+	},
+);
