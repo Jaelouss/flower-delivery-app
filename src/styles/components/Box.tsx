@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { AlignItems, JustifyContent } from '../mixins';
+import { relative } from 'path';
 
 interface BoxProps {
 	column?: boolean;
@@ -8,14 +9,25 @@ interface BoxProps {
 	justify?: JustifyContent;
 	gap?: string;
 	width?: string;
+	border?: string;
+	borderRadius?: string;
+	padding?: string;
+	margin?: string;
+	zIndex?: string;
 	children?: React.ReactNode;
 }
 
 export const Box = styled.div<BoxProps>`
 	display: flex;
-	width: ${({ width }) => width || '100%'};
 	flex-direction: ${({ column }) => (column ? 'column' : 'row')};
 	align-items: ${({ align }) => align || 'center'};
 	justify-content: ${({ justify }) => justify || 'center'};
-	gap: ${({ gap }) => gap || ''};
+	gap: ${({ gap }) => gap || '0'};
+	width: ${({ width }) => width || '100%'};
+	border: ${({ border }) => border || 'none'};
+	border-radius: ${({ borderRadius }) => borderRadius || '0'};
+	padding: ${({ padding }) => padding || '0'};
+	margin: ${({ margin }) => margin || '0'};
+	position: ${({ zIndex }) => (zIndex ? 'relative' : 'static')};
+	z-index: ${({ zIndex }) => zIndex || 'auto'};
 `;

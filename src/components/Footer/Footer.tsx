@@ -10,7 +10,7 @@ import {
 	TelegramLogoIcon,
 	WhatsappLogoIcon,
 } from '@phosphor-icons/react';
-import { ExternalLink } from '@/components';
+import { ExternalLink } from '@UI';
 
 export interface FooterProps {}
 

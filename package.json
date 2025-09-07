@@ -24,6 +24,7 @@
     "zod": "^4.1.5"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.3",
     "@eslint/eslintrc": "^3",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",

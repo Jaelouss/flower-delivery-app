@@ -2,7 +2,7 @@
 
 import { Box, Icon, NavLink, theme } from '@styles';
 import { usePathname } from 'next/navigation';
-import CartIcon from './CartIcon.svg';
+import CartIcon from '@icons/CartIcon.svg';
 import { CartBadge } from '@UI';
 export interface CartProps {}
 

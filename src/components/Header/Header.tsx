@@ -2,7 +2,8 @@
 
 import styled from '@emotion/styled';
 import { flexRow, theme } from '@styles';
-import { Cart, LogoMain, Navigation } from '@components';
+import { Cart, Navigation } from '@components';
+import { LogoMain } from '@UI';
 
 export interface HeaderProps {}
 

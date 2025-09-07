@@ -23,6 +23,8 @@
 			"@UI": ["./src/components/UI"],
 			"@styles": ["./src/styles"],
 			"@components": ["./src/components"],
+			"@icons/*": ["./src/images/icons/*"],
+			"@pictures/*": ["./src/images/pictures/*"],
 			"@/*": ["./src/*"]
 		}
 	},
