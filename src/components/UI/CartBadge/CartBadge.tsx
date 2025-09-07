@@ -1,10 +1,15 @@
 import styled from "@emotion/styled";
+import { useCartStore } from "@store/useCartStore";
 import { flexRow, theme } from "@styles";
 
 interface CartBadgeProps {}
 
 export const CartBadge: React.FC<CartBadgeProps> = () => {
-	return <Badge>1</Badge>;
+	const { totalQuantity, items } = useCartStore();
+
+	if (totalQuantity === 0) return null;
+
+	return <Badge>{totalQuantity}</Badge>;
 };
 
 const Badge = styled.div`
@@ -14,9 +19,11 @@ const Badge = styled.div`
 	right: 0;
 	transform: translate(20%, -10%);
 	background: ${theme.colors.button};
-	width: 16px;
-	height: 16px;
+	width: 24px;
+	height: 24px;
 	border-radius: 50%;
 	color: ${theme.colors.bg};
-	font-size: 10px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1;
 `;

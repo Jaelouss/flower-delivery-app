@@ -43,8 +43,12 @@ export const GoogleLink: React.FC<GoogleLinkProps> = ({
 	if (!location) return null;
 
 	return (
-		<Box gap='8px' align='center'>
-			{text && <Text>{text}</Text>}
+		<Box width='auto' gap='12px'>
+			{text && (
+				<Text fontSize='18px' fontWeight={700}>
+					{text}
+				</Text>
+			)}
 			<Icon>
 				<MapPinIcon />
 			</Icon>

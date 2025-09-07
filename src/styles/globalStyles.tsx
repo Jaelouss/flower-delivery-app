@@ -1,6 +1,6 @@
-import '@a1rth/css-normalize';
-import { css } from '@emotion/react';
-import { theme } from './theme';
+import "@a1rth/css-normalize";
+import { css } from "@emotion/react";
+import { theme } from "./theme";
 
 export const globalStyles = css`
 	*,
@@ -23,10 +23,13 @@ export const globalStyles = css`
 		line-height: normal;
 		min-height: 100vh;
 		padding-inline: ${theme.spacing(10.5)};
+		 max-width: 1440px;
+		  margin: 0 auto;
 	}
 
 	main {
 		flex: 1;
+		margin-top:88px;
 	}
 
 	h1,

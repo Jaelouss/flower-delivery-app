@@ -1,7 +1,11 @@
 {
 	"compilerOptions": {
 		"target": "ES2017",
-		"lib": ["dom", "dom.iterable", "esnext"],
+		"lib": [
+			"dom",
+			"dom.iterable",
+			"esnext"
+		],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": true,
@@ -20,12 +24,27 @@
 		],
 		"baseUrl": ".",
 		"paths": {
-			"@UI": ["./src/components/UI"],
-			"@styles": ["./src/styles"],
-			"@components": ["./src/components"],
-			"@icons/*": ["./src/images/icons/*"],
-			"@pictures/*": ["./src/images/pictures/*"],
-			"@/*": ["./src/*"]
+			"@UI": [
+				"./src/components/UI"
+			],
+			"@store/*": [
+				"./src/store/*"
+			],
+			"@styles": [
+				"./src/styles"
+			],
+			"@components": [
+				"./src/components"
+			],
+			"@icons/*": [
+				"./src/images/icons/*"
+			],
+			"@pictures/*": [
+				"./src/images/pictures/*"
+			],
+			"@/*": [
+				"./src/*"
+			]
 		}
 	},
 	"include": [
@@ -34,7 +53,10 @@
 		"src/types",
 		"**/*.ts",
 		"**/*.tsx",
-		".next/types/**/*.ts"
+		".next/types/**/*.ts",
+		"src/scripts/seed.ts"
 	],
-	"exclude": ["node_modules"]
+	"exclude": [
+		"node_modules"
+	]
 }

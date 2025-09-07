@@ -1,17 +1,17 @@
-import { NextResponse } from 'next/server';
-import dbConnect from '@/lib/models/connection';
-import Flower from '@/lib/models/Flower';
+import { NextResponse } from "next/server";
+import dbConnect from "@/lib/models/connection";
+import Flower from "@/lib/models/Flower";
 
 export async function GET(request: Request) {
 	await dbConnect();
 
 	try {
 		const { searchParams } = new URL(request.url);
-		const shopId = searchParams.get('shopId');
-		const sort = searchParams.get('sort');
-		const order = searchParams.get('order') || 'asc';
-		const page = parseInt(searchParams.get('page') || '1');
-		const limit = parseInt(searchParams.get('limit') || '8');
+		const shopId = searchParams.get("shopId");
+		const sort = searchParams.get("sort");
+		const order = searchParams.get("order") || "asc";
+		const page = parseInt(searchParams.get("page") || "1", 10);
+		const limitPerPage = parseInt(searchParams.get("limit") || "8", 10);
 
 		let query = {};
 		if (shopId) {
@@ -19,17 +19,21 @@ export async function GET(request: Request) {
 		}
 
 		let sortOption = {};
-		if (sort === 'price') {
-			sortOption = { price: order === 'asc' ? 1 : -1 };
-		} else if (sort === 'name') {
-			sortOption = { name: order === 'asc' ? 1 : -1 };
+		if (sort === "price") {
+			sortOption = { price: order === "asc" ? 1 : -1 };
+		} else if (sort === "name") {
+			sortOption = { name: order === "asc" ? 1 : -1 };
 		} else {
 			sortOption = { createdAt: -1 };
 		}
 
-		const skip = (page - 1) * limit;
+		// const skip = (page - 1) * limit;
+		const limit = page * limitPerPage;
 
-		const flowers = await Flower.find(query).sort(sortOption).skip(skip).limit(limit);
+		const flowers = await Flower.find(query)
+			.collation({ locale: "en", strength: 2 })
+			.sort(sortOption)
+			.limit(limit);
 
 		const total = await Flower.countDocuments(query);
 
@@ -43,7 +47,10 @@ export async function GET(request: Request) {
 			},
 		});
 	} catch (error) {
-		console.error('Error fetching flowers:', error);
-		return NextResponse.json({ error: 'Failed to fetch flowers' }, { status: 500 });
+		console.error("Error fetching flowers:", error);
+		return NextResponse.json(
+			{ error: "Failed to fetch flowers" },
+			{ status: 500 },
+		);
 	}
 }

@@ -1,8 +1,8 @@
-import { InferSchemaType } from 'mongoose';
-import { CouponSchema } from '@/lib/models/Coupon';
-import { FlowerSchema } from '@/lib/models/Flower';
-import { ShopSchema } from '@/lib/models/Shop';
-import { OrderSchema } from '@/lib/models/Order';
+import type { InferSchemaType } from "mongoose";
+import type { CouponSchema } from "@/lib/models/Coupon";
+import type { FlowerSchema } from "@/lib/models/Flower";
+import type { OrderSchema } from "@/lib/models/Order";
+import type { ShopSchema } from "@/lib/models/Shop";
 
 export type Flower = InferSchemaType<typeof FlowerSchema>;
 export type Shop = InferSchemaType<typeof ShopSchema>;
@@ -15,6 +15,7 @@ export type ApiFlower = {
 	price: number;
 	description: string;
 	shopId: string;
+	flowerPic: string;
 	createdAt: string;
 	updatedAt?: string;
 };
@@ -53,6 +54,7 @@ export type ApiShop = {
 	name: string;
 	address: string;
 	description: string;
+	imageUrl: string;
 	location: {
 		lat: number;
 		lng: number;

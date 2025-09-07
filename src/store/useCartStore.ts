@@ -4,56 +4,77 @@ import type { CartItem } from "@/types/apiTypes";
 
 interface CartState {
 	items: CartItem[];
+	total: number;
+	totalQuantity: number;
 	addToCart: (item: CartItem) => void;
 	updateQuantity: (flowerId: string, quantity: number) => void;
 	removeFromCart: (flowerId: string) => void;
 	clearCart: () => void;
-	total: number;
 }
 
 export const useCartStore = create<CartState>()(
 	persist(
-		(set, get) => ({
+		(set) => ({
 			items: [],
+			total: 0,
+			totalQuantity: 0,
 
 			addToCart: (item) =>
 				set((state) => {
 					const exists = state.items.find((i) => i.flowerId === item.flowerId);
-					if (exists) {
-						return {
-							items: state.items.map((i) =>
+					const updatedItems = exists
+						? state.items.map((i) =>
 								i.flowerId === item.flowerId
 									? { ...i, quantity: i.quantity + item.quantity }
 									: i,
-							),
-						};
-					}
-					return { items: [...state.items, item] };
+							)
+						: [...state.items, item];
+
+					return {
+						items: updatedItems,
+						total: updatedItems.reduce(
+							(sum, i) => sum + i.price * i.quantity,
+							0,
+						),
+						totalQuantity: updatedItems.reduce((sum, i) => sum + i.quantity, 0),
+					};
 				}),
 
 			updateQuantity: (flowerId, quantity) =>
-				set((state) => ({
-					items:
+				set((state) => {
+					const updatedItems =
 						quantity <= 0
 							? state.items.filter((i) => i.flowerId !== flowerId)
 							: state.items.map((i) =>
 									i.flowerId === flowerId ? { ...i, quantity } : i,
-								),
-				})),
+								);
+
+					return {
+						items: updatedItems,
+						total: updatedItems.reduce(
+							(sum, i) => sum + i.price * i.quantity,
+							0,
+						),
+						totalQuantity: updatedItems.reduce((sum, i) => sum + i.quantity, 0),
+					};
+				}),
 
 			removeFromCart: (flowerId) =>
-				set((state) => ({
-					items: state.items.filter((i) => i.flowerId !== flowerId),
-				})),
+				set((state) => {
+					const updatedItems = state.items.filter(
+						(i) => i.flowerId !== flowerId,
+					);
+					return {
+						items: updatedItems,
+						total: updatedItems.reduce(
+							(sum, i) => sum + i.price * i.quantity,
+							0,
+						),
+						totalQuantity: updatedItems.reduce((sum, i) => sum + i.quantity, 0),
+					};
+				}),
 
-			clearCart: () => set({ items: [] }),
-
-			get total() {
-				return get().items.reduce(
-					(sum, item) => sum + item.price * item.quantity,
-					0,
-				);
-			},
+			clearCart: () => set({ items: [], total: 0, totalQuantity: 0 }),
 		}),
 		{
 			name: "cart-storage",
