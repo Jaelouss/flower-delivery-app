@@ -1,5 +1,5 @@
-'use client';
-import Image from 'next/image';
+"use client";
+
 interface ImageProps {
 	name: string;
 	folder: string;
@@ -8,21 +8,33 @@ interface ImageProps {
 	height?: number;
 }
 
-export const ImageSet: React.FC<ImageProps> = ({ name, folder, alt, width, height }) => {
-	const basePath = `/images/pictures/${folder}`;
-
+export const ImageSet: React.FC<ImageProps> = ({
+	name,
+	folder,
+	alt,
+	width,
+	height,
+}) => {
+	const imgPath = `/pictures/${folder}/${name}`;
 
 	return (
 		<picture>
 			<source
-				srcSet={`${basePath}/${name}.webp 1x, ${basePath}/${name}-2x.webp 2x`}
+				srcSet={`${imgPath}.webp 1x, ${imgPath}-2x.webp 2x`}
 				type='image/webp'
 			/>
-			<Image
-				src={`${basePath}/${name}.jpg`}
+			<img
+				src={`${imgPath}.jpg`}
 				alt={alt}
 				width={width}
 				height={height}
+				style={{
+					display: "block",
+					objectFit: "cover",
+					maxWidth: "unset",
+					height: `${height + "px"}`,
+					width: `${width + "px"}`,
+				}}
 			/>
 		</picture>
 	);

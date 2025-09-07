@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { theme, flexRow } from '@styles';
+import styled from "@emotion/styled";
+import { flexRow, theme } from "@styles";
 
 interface CartBadgeProps {}
 
@@ -8,7 +8,7 @@ export const CartBadge: React.FC<CartBadgeProps> = () => {
 };
 
 const Badge = styled.div`
-	${flexRow('center', 'center')}
+	${flexRow("center", "center")}
 	position: absolute;
 	top: 0;
 	right: 0;

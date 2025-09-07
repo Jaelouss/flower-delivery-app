@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import styled from '@emotion/styled';
-import { Box, theme } from '@styles';
-import { CustomButton, MainFlowerCard } from '@UI';
+import { CustomButton, MainFlowerCard } from "@UI";
+import styled from "@emotion/styled";
+import { Box, theme } from "@styles";
 
 export default function ShopPage() {
 	return (
@@ -13,11 +13,31 @@ export default function ShopPage() {
 				<Shift />
 				pure <Span>emotions</Span>
 			</Title>
-			<CustomButton onClick={() => { }} variant='primary' margin='178px 0 0 0 ' value='Shop now' />
-			<Box>
-			<MainFlowerCard name='bouquetOfFlowers1'/>
-			<MainFlowerCard name='bouquetOfFlowers2'/>
-			<MainFlowerCard name='bouquetOfFlowers3'/>
+			<Box maxWidth='1164px' position='relative' justify='flex-start'>
+				<CustomButton
+					onClick={() => {}}
+					variant='primary'
+					margin='178px 47px 234px 0 '
+					value='Shop now'
+				/>
+				<MainFlowerCard
+					name='bouquetOfFlowers1'
+					zIndex='1'
+					top='7%'
+					right='40%'
+				/>
+				<MainFlowerCard
+					name='bouquetOfFlowers2'
+					zIndex='2'
+					top=' 20%'
+					right='18%'
+				/>
+				<MainFlowerCard
+					name='bouquetOfFlowers3'
+					zIndex='3'
+					top='-6%'
+					right='0'
+				/>
 			</Box>
 		</Section>
 	);

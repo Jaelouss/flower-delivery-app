@@ -19,12 +19,18 @@
 		"enabled": true,
 		"indentStyle": "tab"
 	},
+	"javascript": {
+		"formatter": {
+			"jsxQuoteStyle": "single"
+		}
+	},
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": true,
 			"suspicious": {
-				"noUnknownAtRules": "off"
+				"noUnknownAtRules": "off",
+				"noEmptyInterface": "off"
 			}
 		},
 		"domains": {
