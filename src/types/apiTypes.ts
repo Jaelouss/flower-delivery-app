@@ -80,6 +80,9 @@ export type CartItem = {
 	name: string;
 	price: number;
 	quantity: number;
+	description: string;
+	shopId: string;
+	flowerPic: string;
 };
 
 export type CreateOrderData = {

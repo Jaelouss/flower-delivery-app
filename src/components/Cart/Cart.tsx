@@ -16,7 +16,7 @@ export const Cart: React.FC<CartProps> = () => {
 			href={navItem.href}
 			$isActive={pathname === navItem.href}
 		>
-			<Box gap='6px'>
+			<Box cursor='pointer' gap='6px'>
 				{navItem.label}
 				<Icon
 					$size={[42, 42]}

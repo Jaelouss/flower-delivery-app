@@ -1,9 +1,11 @@
-import styled from '@emotion/styled';
-import Link from 'next/link';
-import { theme } from '../theme';
+"use client";
+
+import styled from "@emotion/styled";
+import Link from "next/link";
+import { theme } from "../theme";
 
 export const NavLink = styled(Link, {
-	shouldForwardProp: (prop) => prop !== '$isActive',
+	shouldForwardProp: (prop) => prop !== "$isActive",
 })<{ $isActive: boolean }>`
 	width: 124px;
 	height: 40px;
@@ -15,4 +17,5 @@ export const NavLink = styled(Link, {
 	font-size: 16px;
 	font-weight: ${({ $isActive }) => ($isActive ? 700 : 400)};
 	text-decoration: none;
+	cursor:pointer;
 `;

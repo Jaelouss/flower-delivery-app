@@ -1,16 +1,19 @@
-'use client';
+"use client";
 
-import styled from '@emotion/styled';
-import { flexColumn, theme } from '@styles';
+import styled from "@emotion/styled";
+import { flexColumn, theme } from "@styles";
 
 export interface CustomButtonProps {
-	onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-	variant: 'primary' | 'secondary';
+	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+	variant: "primary" | "secondary";
 	isFullWidth?: boolean;
 	width?: string;
 	value: string;
 	margin?: string;
+	form?: string;
+	isSubmit?: boolean;
 	disabled?: boolean;
+	padding?: string;
 }
 
 export const CustomButton: React.FC<CustomButtonProps> = ({
@@ -21,6 +24,8 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 	value,
 	margin,
 	disabled,
+	form,
+	isSubmit,
 }) => {
 	return (
 		<ButtonStyled
@@ -29,33 +34,37 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 			isFullWidth={isFullWidth || false}
 			width={width}
 			disabled={disabled}
-			margin={margin}>
+			margin={margin}
+			form={form}
+			type={isSubmit ? "submit" : "button"}
+		>
 			{value}
 		</ButtonStyled>
 	);
 };
 
 type ButtonProps = {
-	variant?: 'primary' | 'secondary';
+	variant?: "primary" | "secondary";
 	isFullWidth: boolean;
 	width?: string;
 	margin?: string;
+	padding?: string;
 };
 
 const ButtonStyled = styled.button<ButtonProps>`
 	cursor: pointer;
-	width: ${({ isFullWidth, width }) => (isFullWidth ? '100%' : width || '300px')};
-	padding: 16px 32px;
+	width: ${({ isFullWidth, width }) => (isFullWidth ? "100%" : width || "300px")};
+	padding:${({ padding }) => (padding ? padding : "16px 32px")} ;
 	flex-shrink: 0;
-	${flexColumn('center', 'center')};
+	${flexColumn("center", "center")};
 	border-radius: ${theme.border.radius};
 	font-weight: 700;
 	font-size: 16px;
 	user-select: none;
-	margin: ${({ margin }) => margin || 'none'};
+	margin: ${({ margin }) => margin || "none"};
 
 	${({ variant }) =>
-		variant === 'primary' &&
+		variant === "primary" &&
 		`
 		border: ${theme.border.transparent};
 		background: ${theme.colors.button};
@@ -98,11 +107,14 @@ const ButtonStyled = styled.button<ButtonProps>`
  		}
   `}
 	${({ variant }) =>
-		variant === 'secondary' &&
+		variant === "secondary" &&
 		`
 		background: transparent;
 		border: ${theme.border.transparent};
 		color:${theme.colors.hotPink};
 		text-decoration: underline solid;
+		&:disabled{
+		color:${theme.colors.secondaryDark};
+	}
   `};
 `;

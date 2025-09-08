@@ -1,3 +1,5 @@
+"use client";
+
 import type { Theme as EmotionTheme } from "@emotion/react";
 
 export const theme = {
@@ -16,6 +18,7 @@ export const theme = {
 	spacing: (factor: number) => `${factor * 0.5}rem`,
 	border: {
 		dark: "1px solid #002a32",
+		secondaryDark: "1px solid #4b5563",
 		gray: "1px solid #aaaaaa",
 		pink: "1px solid #FF6B9D",
 		transparent: "1px solid transparent",
@@ -28,6 +31,7 @@ export const theme = {
 	fontFamily: {
 		body: "'Kodchasan', sans-serif",
 		logo: "'Handlee', cursive",
+		inter: "'Inter', sans-serif",
 	},
 } as const;
 

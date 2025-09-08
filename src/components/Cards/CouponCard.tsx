@@ -12,7 +12,6 @@ export interface CouponCardProps {
 }
 
 export const CouponCard: React.FC<CouponCardProps> = ({ coupon }) => {
-	console.log("coupon:", coupon);
 	const { expires, isDisabled } = couponExpiries(coupon);
 	const [copied, setCopied] = useState(false);
 
@@ -40,7 +39,9 @@ export const CouponCard: React.FC<CouponCardProps> = ({ coupon }) => {
 				</TitleWrapper>
 			</List>
 			<CustomButton
-				value={copied ? "Copied!" : "Copy code"}
+				value={
+					isDisabled ? "Check back later" : copied ? "Copied!" : "Copy code"
+				}
 				variant='primary'
 				disabled={isDisabled}
 				isFullWidth

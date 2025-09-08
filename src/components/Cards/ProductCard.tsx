@@ -27,6 +27,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ shop, flower }) => {
 			flowerId: flower._id,
 			name: flower.name,
 			price: flower.price,
+			description: flower.description,
+			shopId: flower.shopId,
+			flowerPic: flower.flowerPic,
 			quantity,
 		});
 	};
@@ -38,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ shop, flower }) => {
 					<ClickableBox
 						gap='10px'
 						column
-						onClick={() => setSelectedShop(shop!._id)}
+						onClick={() => setSelectedShop(shop!)}
 					>
 						<Box column gap='4px'>
 							<Title>{shop?.name}</Title>

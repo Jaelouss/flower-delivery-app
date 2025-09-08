@@ -1,7 +1,9 @@
-import styled from '@emotion/styled';
-import { theme } from '../theme';
-import type { IconProps } from '@phosphor-icons/react';
-import { flexRow } from '../mixins';
+"use client";
+
+import styled from "@emotion/styled";
+import { theme } from "../theme";
+import type { IconProps } from "@phosphor-icons/react";
+import { flexRow } from "../mixins";
 
 interface Props extends IconProps {
 	$size?: number[];
@@ -10,7 +12,7 @@ interface Props extends IconProps {
 }
 
 export const Icon = styled.span<Props>`
-	position: ${(props) => [props.position ?? 'static']};
+	position: ${(props) => [props.position ?? "static"]};
 	svg {
 		${flexRow()}
 		width: ${(props) => props.$size?.[0] ?? 32}px;

@@ -1,3 +1,5 @@
+"use client";
+
 import "@a1rth/css-normalize";
 import { css } from "@emotion/react";
 import { theme } from "./theme";

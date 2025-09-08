@@ -3,6 +3,7 @@
 import { GoogleLink, SortOrderButton } from "@UI";
 import styled from "@emotion/styled";
 import { X } from "@phosphor-icons/react";
+import { useCartStore } from "@store/useCartStore";
 import { useShopStore } from "@store/useShopStore";
 import { Box, flexColumn, Icon, theme } from "@styles";
 import type { Location } from "../UI/GoogleLink/GoogleLink";
@@ -35,7 +36,7 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
 		setSortByName,
 		setSelectedShop,
 	} = useShopStore();
-
+	const { clearCart } = useCartStore();
 	return (
 		<StyledSection>
 			<Box justify='space-between'>
@@ -47,7 +48,12 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
 							location={shopLocation}
 							address={shopAddress}
 						/>
-						<ResetBtn onClick={() => setSelectedShop(null)}>
+						<ResetBtn
+							onClick={() => {
+								setSelectedShop(null);
+								clearCart();
+							}}
+						>
 							<Icon>
 								<X />
 							</Icon>

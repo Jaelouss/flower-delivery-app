@@ -1,5 +1,7 @@
-import styled from '@emotion/styled';
-import { theme } from '../theme';
+"use client";
+
+import styled from "@emotion/styled";
+import { theme } from "../theme";
 
 interface LogoTextProps {
 	fontSize?: string;
@@ -11,8 +13,8 @@ interface LogoTextProps {
 
 export const LogoText = styled.p<LogoTextProps>`
 	color: ${({ color }) => color || theme.colors.dark};
-	font-size: ${({ fontSize }) => fontSize || '24px'};
+	font-size: ${({ fontSize }) => fontSize || "24px"};
 	font-weight: ${({ fontWeight }) => fontWeight || 400};
 	font-family: ${theme.fontFamily.logo};
-	text-align: ${({ textAlign }) => textAlign || 'start'};
+	text-align: ${({ textAlign }) => textAlign || "start"};
 `;

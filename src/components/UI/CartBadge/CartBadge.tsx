@@ -1,3 +1,4 @@
+"use client";
 import styled from "@emotion/styled";
 import { useCartStore } from "@store/useCartStore";
 import { flexRow, theme } from "@styles";
