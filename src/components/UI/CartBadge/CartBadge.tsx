@@ -6,7 +6,7 @@ import { flexRow, theme } from "@styles";
 interface CartBadgeProps {}
 
 export const CartBadge: React.FC<CartBadgeProps> = () => {
-	const { totalQuantity, items } = useCartStore();
+	const { totalQuantity } = useCartStore();
 
 	if (totalQuantity === 0) return null;
 

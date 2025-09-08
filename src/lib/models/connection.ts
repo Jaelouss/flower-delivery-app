@@ -1,4 +1,4 @@
-import mongoose, { Connection } from 'mongoose';
+import mongoose, { type Connection } from "mongoose";
 
 if (!global.mongoose) {
 	global.mongoose = { conn: null, promise: null } as {
@@ -25,15 +25,15 @@ async function dbConnect(): Promise<Connection> {
 
 	try {
 		cached.conn = await cached.promise;
-		console.log('✅ Підключено до MongoDB');
+		console.log("✅ Підключено до MongoDB");
 	} catch (error) {
 		cached.promise = null;
-		console.error('❌ Помилка підключення до MongoDB:', error);
+		console.error("❌ Помилка підключення до MongoDB:", error);
 		throw error;
 	}
 
 	if (!cached.conn) {
-		throw new Error('MongoDB connection failed');
+		throw new Error("MongoDB connection failed");
 	}
 
 	return cached.conn;

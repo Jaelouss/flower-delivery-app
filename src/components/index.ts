@@ -13,4 +13,3 @@ export { Navigation } from "./Navigation/Navigation";
 export { OrderInfo } from "./OrderInfo/OrderInfo";
 export { ProductSection } from "./ProductSection/ProductSection";
 export { RecaptchaField } from "./Recaptcha/Recaptcha";
-// export {} from './';

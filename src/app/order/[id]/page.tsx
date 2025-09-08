@@ -1,41 +1,43 @@
 "use client";
 
+import { CustomButton, GoogleLink } from "@UI";
+import { OrderItemsCard } from "@components";
 import styled from "@emotion/styled";
+import { useOrderSearchStore } from "@store/useOrderSearchStore";
 import { Box, flexColumn, flexRow, theme } from "@styles";
 import { useParams, useRouter } from "next/navigation";
 import { useOrder } from "@/lib/api/order";
-import { OrderItemsCard } from "@components";
-import { CustomButton, GoogleLink } from "@UI";
 import { useShops } from "@/lib/api/shops";
-import { CartItem } from "@/types/apiTypes";
-import { useOrderSearchStore } from "@store/useOrderSearchStore";
 
 export default function Page() {
 	const { id } = useParams();
-	const { data: order  } = useOrder(String(id));
-	const {data: shops} = useShops()
-	const orderedShop = shops?.find(shop=>String(shop._id)===String(order?.shopId))
-	const router = useRouter()
+	const { data: order } = useOrder(String(id));
+	const { data: shops } = useShops();
+	const orderedShop = shops?.find(
+		(shop) => String(shop._id) === String(order?.shopId),
+	);
+	const router = useRouter();
 	const { save } = useOrderSearchStore();
 	const formattedCreatedAt = order?.createdAt
-  ? new Date(order.createdAt).toLocaleString(undefined, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    })
-  : 'No data';
+		? new Date(order.createdAt).toLocaleString(undefined, {
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+				hour: "2-digit",
+				minute: "2-digit",
+			})
+		: "No data";
 
-const handleRedirect = () => {
-	  save({
-    email: order?.email,
-    phone: order?.phone,
-  });
+	const handleRedirect = () => {
+		save({
+			email: order?.email,
+			phone: order?.phone,
+		});
 
-  router.push(`/order?name=${encodeURIComponent(order?.name || '')}&email=${encodeURIComponent(order?.email || '')}`);
-}
-
+		router.push(
+			`/order?name=${encodeURIComponent(order?.name || "")}&email=${encodeURIComponent(order?.email || "")}`,
+		);
+	};
 
 	return (
 		<StyledSection>
@@ -48,53 +50,66 @@ const handleRedirect = () => {
 						address={orderedShop?.address}
 					/>
 					<ItemList>
-  {order?.items.map((item) => (
-		  <Item key={String(item.flowerId)}>
-      <OrderItemsCard
-        isOrderPage
-        flower={item}
-      />
-    </Item>
-	
-	)
-  )}
-</ItemList>
+						{order?.items.map((item) => (
+							<Item key={String(item.flowerId)}>
+								<OrderItemsCard
+									isOrderPage
+									flower={{
+										...item,
+										flowerId: String(item.flowerId),
+										shopId: item.shopId ? String(item.shopId) : "",
+										description: item.description || "",
+										flowerPic: item.flowerPic || "",
+									}}
+								/>
+							</Item>
+						))}
+					</ItemList>
 				</LeftItem>
-				<RightItem><RightItemBox>
-					<Box column gap='16px'>
-						<Box justify="space-between">
-						<InfoTitle>ID</InfoTitle>
-						<InfoTitle>{id}</InfoTitle>
-						</Box>
-						<Box column gap="8px">
-						<Box justify="space-between">
-						<OrderInfoTitle>Name</OrderInfoTitle>
-						<OrderInfoValue>{order?.name || 'No data'}</OrderInfoValue>
-						</Box>
-						<Box justify="space-between">
-						<OrderInfoTitle>Email</OrderInfoTitle>
-						<OrderInfoValue>{order?.email || 'No data'}</OrderInfoValue>
-						</Box>
-						<Box justify="space-between">
-						<OrderInfoTitle>Phone Number</OrderInfoTitle>
-						<OrderInfoValue>{order?.phone || 'No data'}</OrderInfoValue>
-						</Box>
-						<Box justify="space-between">
-						<OrderInfoTitle>Address</OrderInfoTitle>
-						<OrderInfoValue>{order?.address || 'No data'}</OrderInfoValue>
-						</Box>
-						<Box justify="space-between">
-						<OrderInfoTitle>Date</OrderInfoTitle>
-						<OrderInfoValue>{formattedCreatedAt}</OrderInfoValue>
-						</Box>
-						</Box>
-					</Box>
-						<Box border="border-top: 1px solid var(--Dark, #002A32)" justify='space-between'>
-									<TotalTitle>Total</TotalTitle>
-									<TotalValue>{order?.total}</TotalValue>
+				<RightItem>
+					<RightItemBox>
+						<Box column gap='16px'>
+							<Box justify='space-between'>
+								<InfoTitle>ID</InfoTitle>
+								<InfoTitle>{id}</InfoTitle>
+							</Box>
+							<Box column gap='8px'>
+								<Box justify='space-between'>
+									<OrderInfoTitle>Name</OrderInfoTitle>
+									<OrderInfoValue>{order?.name || "No data"}</OrderInfoValue>
 								</Box>
-				</RightItemBox>
-				<CustomButton padding="16px 72px" variant="secondary" value="See orders history" onClick={handleRedirect}/>
+								<Box justify='space-between'>
+									<OrderInfoTitle>Email</OrderInfoTitle>
+									<OrderInfoValue>{order?.email || "No data"}</OrderInfoValue>
+								</Box>
+								<Box justify='space-between'>
+									<OrderInfoTitle>Phone Number</OrderInfoTitle>
+									<OrderInfoValue>{order?.phone || "No data"}</OrderInfoValue>
+								</Box>
+								<Box justify='space-between'>
+									<OrderInfoTitle>Address</OrderInfoTitle>
+									<OrderInfoValue>{order?.address || "No data"}</OrderInfoValue>
+								</Box>
+								<Box justify='space-between'>
+									<OrderInfoTitle>Date</OrderInfoTitle>
+									<OrderInfoValue>{formattedCreatedAt}</OrderInfoValue>
+								</Box>
+							</Box>
+						</Box>
+						<Box
+							border='border-top: 1px solid var(--Dark, #002A32)'
+							justify='space-between'
+						>
+							<TotalTitle>Total</TotalTitle>
+							<TotalValue>{order?.total}</TotalValue>
+						</Box>
+					</RightItemBox>
+					<CustomButton
+						padding='16px 72px'
+						variant='secondary'
+						value='See orders history'
+						onClick={handleRedirect}
+					/>
 				</RightItem>
 			</List>
 		</StyledSection>
@@ -125,7 +140,7 @@ background: #FFF;
 
 const RightItem = styled.li`
 	${flexColumn("flex-start", "center", "24px")};
-`
+`;
 const RightItemBox = styled.div`
 	${flexColumn("flex-start", "center", "66px")};
 	width: 516px;
@@ -164,8 +179,8 @@ background-clip: text;
 const OrderInfoTitle = styled.span`
 color: ${theme.colors.dark};
 font-weight: 700;
-`
+`;
 const OrderInfoValue = styled.span`
 color: ${theme.colors.dark};
 font-weight: 400;
-`
+`;

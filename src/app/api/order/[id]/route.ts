@@ -2,10 +2,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/models/connection";
 import Order from "@/lib/models/Order";
 
-export async function GET(
-	request: Request,
-	{ params }: { params: { id: string } },
-) {
+export async function GET({ params }: { params: { id: string } }) {
 	await dbConnect();
 
 	try {

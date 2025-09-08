@@ -17,7 +17,7 @@ interface CartState {
 
 export const useCartStore = create<CartState>()(
 	persist(
-		(set, get) => {
+		(set) => {
 			const calculateDelivery = (quantity: number) => {
 				if (quantity > 10) return 0;
 				if (quantity > 5) return 100;

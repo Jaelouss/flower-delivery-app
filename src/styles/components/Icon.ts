@@ -1,9 +1,9 @@
 "use client";
 
 import styled from "@emotion/styled";
-import { theme } from "../theme";
 import type { IconProps } from "@phosphor-icons/react";
 import { flexRow } from "../mixins";
+import { theme } from "../theme";
 
 interface Props extends IconProps {
 	$size?: number[];

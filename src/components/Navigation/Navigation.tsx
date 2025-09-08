@@ -1,5 +1,5 @@
 "use client";
-import { NavLink, theme } from "@styles";
+import { NavLink } from "@styles";
 import { usePathname } from "next/navigation";
 
 export interface NavigationProps {}

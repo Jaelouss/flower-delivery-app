@@ -58,7 +58,7 @@ export function useCreateOrder() {
 			if (!res.ok) throw new Error("Failed to create order");
 			return res.json();
 		},
-		onSuccess: (data) => {
+		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["orders"] });
 		},
 	});

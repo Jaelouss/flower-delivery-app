@@ -6,7 +6,7 @@ interface Params {
 	code: string;
 }
 
-export async function GET(req: Request, { params }: { params: Params }) {
+export async function GET({ params }: { params: Params }) {
 	await dbConnect();
 
 	const { code } = await params;
