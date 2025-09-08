@@ -49,12 +49,10 @@ export default function ShopPage() {
 const Section = styled.section`
 	height: 100%;
 	padding-top: 81px;
-	padding-top: 81px;
 	padding-left: 108px;
 	background-image: url('/waves.svg');
 	background-position: -80px 30px;
 	background-repeat: no-repeat;
-	background-size: cover;
 	background-size: auto 362px;
 `;
 const Title = styled.h1`
