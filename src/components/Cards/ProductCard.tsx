@@ -9,6 +9,7 @@ import { Box, flexColumn, theme } from "@styles";
 import Image from "next/image";
 import { useState } from "react";
 import type { ApiFlower, ApiShop } from "@/types/apiTypes";
+import { AddToFavorite } from "../AddToFavorite/AddToFavorite";
 
 export interface ProductCardProps {
 	shop?: ApiShop;
@@ -72,6 +73,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ shop, flower }) => {
 							sizes='202px'
 							style={{ objectFit: "cover" }}
 						/>
+
+						<AddToFavorite flowerId={flower?._id!} />
 					</Box>
 					<Box column gap='4px'>
 						<List>

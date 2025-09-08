@@ -12,6 +12,7 @@ export async function GET(request: Request) {
 		const order = searchParams.get("order") || "asc";
 		const page = parseInt(searchParams.get("page") || "1", 10);
 		const limitPerPage = parseInt(searchParams.get("limit") || "8", 10);
+		const favoriteIds = searchParams.getAll("favoriteIds");
 
 		let query = {};
 		if (shopId) {
@@ -27,18 +28,25 @@ export async function GET(request: Request) {
 			sortOption = { createdAt: -1 };
 		}
 
-		// const skip = (page - 1) * limit;
 		const limit = page * limitPerPage;
 
-		const flowers = await Flower.find(query)
+		const allFlowers = await Flower.find(query)
 			.collation({ locale: "en", strength: 2 })
-			.sort(sortOption)
-			.limit(limit);
+			.sort(sortOption);
+
+		const favorites = allFlowers.filter((flower) =>
+			favoriteIds.includes(flower._id.toString()),
+		);
+		const others = allFlowers.filter(
+			(flower) => !favoriteIds.includes(flower._id.toString()),
+		);
+
+		const sortedFlowers = [...favorites, ...others].slice(0, limit);
 
 		const total = await Flower.countDocuments(query);
 
 		return NextResponse.json({
-			flowers,
+			flowers: sortedFlowers,
 			pagination: {
 				currentPage: page,
 				totalPages: Math.ceil(total / limit),

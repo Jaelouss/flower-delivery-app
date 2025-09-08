@@ -1,6 +1,6 @@
 import {
-	type UseQueryOptions,
 	keepPreviousData,
+	type UseQueryOptions,
 	useQuery,
 } from "@tanstack/react-query";
 import type { ApiFlowersResponse } from "@/types/apiTypes";
@@ -11,6 +11,7 @@ type UseFlowersParams = {
 	order?: "asc" | "desc" | null;
 	page?: number;
 	limit?: number;
+	favoriteIds?: string[];
 };
 
 export function useFlowers(
@@ -20,10 +21,17 @@ export function useFlowers(
 		"queryKey" | "queryFn"
 	> = {},
 ) {
-	const { shopId, sort, order = "asc", page = 1, limit = 8 } = params;
+	const {
+		shopId,
+		sort,
+		order = "asc",
+		page = 1,
+		limit = 8,
+		favoriteIds,
+	} = params;
 
 	return useQuery<ApiFlowersResponse>({
-		queryKey: ["flowers", shopId, sort, order, page, limit],
+		queryKey: ["flowers", shopId, sort, order, page, limit, favoriteIds],
 		queryFn: async () => {
 			const queryParams = new URLSearchParams();
 
@@ -32,6 +40,10 @@ export function useFlowers(
 			if (order) queryParams.append("order", order);
 			if (page) queryParams.append("page", page.toString());
 			if (limit) queryParams.append("limit", limit.toString());
+			if (favoriteIds)
+				favoriteIds?.forEach((id) => {
+					queryParams.append("favoriteIds", id);
+				});
 
 			const url = `/api/flowers?${queryParams}`;
 			const res = await fetch(url);

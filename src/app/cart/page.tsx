@@ -2,13 +2,14 @@
 
 import { CheckoutForm, GoogleMap, OrderInfo } from "@components";
 import styled from "@emotion/styled";
+import { useCartStore } from "@store/useCartStore";
 import { useShopStore } from "@store/useShopStore";
 import { Fieldset, flexColumn, flexRow, Text, theme } from "@styles";
 import { useCallback, useState } from "react";
 
 export default function Page() {
 	const { selectedShop } = useShopStore();
-
+	const { items } = useCartStore();
 	const [userAddress, setUserAddress] = useState<{
 		city: string;
 		street: string;
@@ -41,7 +42,7 @@ export default function Page() {
 		});
 	}, []);
 
-	if (!selectedShop) {
+	if (!selectedShop && items.length < 1) {
 		return (
 			<StyledSection>
 				<Title>Checkout</Title>

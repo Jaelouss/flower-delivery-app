@@ -1,3 +1,4 @@
+export { AddToFavorite } from "./AddToFavorite/AddToFavorite";
 export { CouponCard } from "./Cards/CouponCard";
 export { MainFlowerCard } from "./Cards/MainFlowerCard";
 export { OrderItemsCard } from "./Cards/OrderItemsCard";
