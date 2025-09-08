@@ -1,4 +1,4 @@
-import { Schema, model, models } from 'mongoose';
+import { model, models, Schema } from "mongoose";
 
 export const OrderSchema = new Schema(
 	{
@@ -7,21 +7,26 @@ export const OrderSchema = new Schema(
 			{
 				flowerId: {
 					type: Schema.Types.ObjectId,
-					ref: 'Flower',
+					ref: "Flower",
 					required: true,
 				},
 				name: { type: String, required: true },
 				price: { type: Number, required: true },
 				quantity: { type: Number, required: true },
+				description: { type: String },
+				shopId: { type: Schema.Types.ObjectId, ref: "Shop" },
+				flowerPic: { type: String },
 			},
 		],
+		deliveryTime: { type: String, required: true },
 		total: { type: Number, required: true },
 		email: { type: String, required: true },
+		name: { type: String, required: true },
 		phone: { type: String, required: true },
 		address: { type: String, required: true },
 		shopId: {
 			type: Schema.Types.ObjectId,
-			ref: 'Shop',
+			ref: "Shop",
 			required: true,
 		},
 		createdAt: { type: Date, default: Date.now },
@@ -29,8 +34,8 @@ export const OrderSchema = new Schema(
 	},
 	{
 		timestamps: true,
-		strict: 'throw',
-	}
+		strict: "throw",
+	},
 );
 
-export default models.Order || model('Order', OrderSchema);
+export default models.Order || model("Order", OrderSchema);

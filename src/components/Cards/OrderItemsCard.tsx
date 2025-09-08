@@ -10,9 +10,13 @@ import type { CartItem } from "@/types/apiTypes";
 
 export interface OrderItemsCardProps {
 	flower: CartItem;
+	isOrderPage?: boolean;
 }
 
-export const OrderItemsCard: React.FC<OrderItemsCardProps> = ({ flower }) => {
+export const OrderItemsCard: React.FC<OrderItemsCardProps> = ({
+	flower,
+	isOrderPage,
+}) => {
 	const [count, setCount] = useState(flower.quantity);
 	const { updateQuantity, removeFromCart } = useCartStore();
 
@@ -31,13 +35,19 @@ export const OrderItemsCard: React.FC<OrderItemsCardProps> = ({ flower }) => {
 				</Box>
 			</Box>
 			<Box width='fit-content' gap='12px' align='center' justify='flex-end'>
-				<FlowerQuantity quantity={count} setQuantity={setCount} />
+				{isOrderPage ? (
+					<Qty>{"Qty:" + flower.quantity}</Qty>
+				) : (
+					<FlowerQuantity quantity={count} setQuantity={setCount} />
+				)}
 				<Price>{flower.price}</Price>
-				<Btn type='button' onClick={() => removeFromCart(flower.flowerId)}>
-					<Icon>
-						<TrashSimpleIcon />
-					</Icon>
-				</Btn>
+				{!isOrderPage && (
+					<Btn type='button' onClick={() => removeFromCart(flower.flowerId)}>
+						<Icon>
+							<TrashSimpleIcon />
+						</Icon>
+					</Btn>
+				)}
 			</Box>
 		</>
 	);
@@ -66,4 +76,9 @@ const Img = styled.img`
 const Btn = styled.button`
 all:unset;
 cursor:pointer;
+`;
+const Qty = styled.span`
+color: ${theme.colors.dark};
+font-size: 14px;
+line-height: 20px;
 `;

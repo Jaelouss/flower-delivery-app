@@ -37,7 +37,7 @@ export const OrderInfo: React.FC<OrderInfoProps> = ({ deliveryTime }) => {
 				<Box justify='space-between'>
 					<OrderData>Coupon</OrderData>
 					<OrderTotal>
-						{"-" + appliedCoupon?.discount + "%" || "Coupon hasn't used"}
+						{appliedCoupon?.discount ? "-" + appliedCoupon?.discount + "%" : "Coupon hasn't used"}
 					</OrderTotal>
 				</Box>
 			</Box>
@@ -77,7 +77,7 @@ font-weight: 700;
 const TotalValue = styled.span`
 font-size: 24px;
 font-weight: 700;
-background: var(--Button, linear-gradient(108deg, #FF6B9D 0%, #F093FB 100%));
+background: ${theme.colors.button};
 background-clip: text;
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;

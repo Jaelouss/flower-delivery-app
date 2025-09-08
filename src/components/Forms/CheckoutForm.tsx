@@ -1,9 +1,15 @@
 "use client";
 import { ApplyCoupon, CustomButton } from "@UI";
 import styled from "@emotion/styled";
+import { useCartStore } from "@store/useCartStore";
+import { useShopStore } from "@store/useShopStore";
 import { Fieldset, Input, Label } from "@styles";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useCreateOrder } from "@/lib/api/order";
+import type { CreateOrderData } from "@/types/apiTypes";
+import { RecaptchaField } from "../Recaptcha/Recaptcha";
 
 type FormData = {
 	email: string;
@@ -16,16 +22,20 @@ type FormData = {
 
 interface CheckoutFormProps {
 	onAddressChange?: (address: { city: string; street: string } | null) => void;
+	deliveryTime?: string | null;
 }
 
-export const CheckoutForm = ({ onAddressChange }: CheckoutFormProps) => {
+export const CheckoutForm = ({
+	onAddressChange,
+	deliveryTime,
+}: CheckoutFormProps) => {
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors, isValid },
 		trigger,
-		control,
+		reset,
 	} = useForm<FormData>({
 		mode: "onBlur",
 		reValidateMode: "onChange",
@@ -33,6 +43,12 @@ export const CheckoutForm = ({ onAddressChange }: CheckoutFormProps) => {
 
 	const [cityBlurred, setCityBlurred] = useState(false);
 	const [streetBlurred, setStreetBlurred] = useState(false);
+	const [recaptchaValue, setRecaptchaValue] = useState(null);
+	const router = useRouter();
+
+	const createOrderMutation = useCreateOrder();
+	const { items: cartItems, total, clearCart } = useCartStore();
+	const { selectedShopId, resetShopStore } = useShopStore();
 
 	const [validAddress, setValidAddress] = useState<{
 		city: string;
@@ -96,7 +112,40 @@ export const CheckoutForm = ({ onAddressChange }: CheckoutFormProps) => {
 	]);
 
 	const onSubmit = (data: FormData) => {
-		console.log("Дані форми:", data);
+		if (!validAddress || !deliveryTime) return;
+
+		const orderData: CreateOrderData = {
+			items: cartItems.map((item) => ({
+				flowerId: item.flowerId,
+				name: item.name,
+				price: item.price,
+				quantity: item.quantity,
+				description: item.description,
+				shopId: item.shopId,
+				flowerPic: item.flowerPic,
+			})),
+			total,
+			deliveryTime,
+			name: `${data.firstName} ${data.lastName}`,
+			email: data.email,
+			phone: data.phone,
+			address: `${data.city}, ${data.street}`,
+			shopId: selectedShopId!,
+		};
+
+		createOrderMutation.mutate(orderData, {
+			onSuccess: (res) => {
+				reset();
+				setValidAddress(null);
+				handleAddressChange(null);
+				clearCart();
+				resetShopStore();
+				router.push(`/order/${res.orderId}`);
+			},
+			onError: (err: Error) => {
+				console.error("Failed to create order:", err.message);
+			},
+		});
 	};
 
 	return (
@@ -198,9 +247,11 @@ export const CheckoutForm = ({ onAddressChange }: CheckoutFormProps) => {
 
 			<ApplyCoupon />
 
+			<RecaptchaField onChange={setRecaptchaValue} />
+
 			<CustomButton
 				isSubmit
-				disabled={!isValid}
+				disabled={!isValid || !recaptchaValue}
 				isFullWidth
 				variant='primary'
 				value='Complete order'

@@ -33,13 +33,9 @@ export type ApiFlowersResponse = {
 export type ApiOrder = {
 	_id: string;
 	orderId: string;
-	items: Array<{
-		flowerId: string;
-		name: string;
-		price: number;
-		quantity: number;
-	}>;
+	items: CartItem[];
 	total: number;
+	name: string;
 	email: string;
 	phone: string;
 	address: string;
@@ -90,8 +86,10 @@ export type CreateOrderData = {
 	total: number;
 	email: string;
 	phone: string;
+	name: string;
 	address: string;
 	shopId: string;
+	deliveryTime: string;
 };
 
 export type CreateOrderResponse = {

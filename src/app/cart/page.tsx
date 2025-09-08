@@ -66,7 +66,10 @@ export default function Page() {
 					<OrderInfo deliveryTime={userAddress?.deliveryTime} />
 				</LeftItem>
 				<RightItem>
-					<CheckoutForm onAddressChange={handleAddressChange} />
+					<CheckoutForm
+						deliveryTime={userAddress?.deliveryTime}
+						onAddressChange={handleAddressChange}
+					/>
 				</RightItem>
 			</List>
 		</StyledSection>

@@ -55,7 +55,9 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"src/scripts/seed.ts",
-		"src/app/api/maps/route.js"
+		"src/app/api/maps/route.js",
+		"src/app/api/verify-recaptcha/route.js",
+		"src/components/Recaptcha/Recaptcha.jsx"
 	],
 	"exclude": [
 		"node_modules"

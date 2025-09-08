@@ -71,7 +71,7 @@ export const GoogleMap = ({
 						directionsRendererRef.current.setDirections(response);
 
 						const duration = response.routes[0].legs[0].duration.text;
-						console.log("Delivery time from Directions:", duration);
+
 						handleDeliveryTimeCalculated(duration);
 
 						const bounds = new window.google.maps.LatLngBounds();
@@ -233,7 +233,6 @@ export const GoogleMap = ({
 			return;
 		}
 
-		console.log("Processing new address:", currentAddress);
 		lastProcessedAddressRef.current = currentAddress;
 
 		processUserAddress(userAddress);
