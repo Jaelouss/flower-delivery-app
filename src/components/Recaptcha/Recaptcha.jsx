@@ -1,17 +1,10 @@
 "use client";
 
 import styled from "@emotion/styled";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export const RecaptchaField = ({ onChange }) => {
-	useEffect(() => {
-		console.log(
-			"RECAPTCHA SITEKEY:",
-			process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-		);
-	}, []);
-
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [value, setValue] = useState(null);
 	const recaptchaRef = useRef(null);
