@@ -4,8 +4,11 @@ import { CustomButton } from "@UI";
 import { MainFlowerCard } from "@components";
 import styled from "@emotion/styled";
 import { Box, theme } from "@styles";
+import { useRouter } from "next/navigation";
 
 export default function ShopPage() {
+	const router = useRouter();
+
 	return (
 		<Section>
 			<Title>
@@ -16,7 +19,7 @@ export default function ShopPage() {
 			</Title>
 			<Box maxWidth='1164px' position='relative' justify='flex-start'>
 				<CustomButton
-					onClick={() => {}}
+					onClick={() => router.push("/shop")}
 					variant='primary'
 					margin='178px 47px 234px 0 '
 					value='Shop now'
