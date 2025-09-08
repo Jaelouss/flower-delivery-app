@@ -1,6 +1,7 @@
 "use client";
 
-import { CustomButton, MainFlowerCard } from "@UI";
+import { CustomButton } from "@UI";
+import { MainFlowerCard } from "@components";
 import styled from "@emotion/styled";
 import { Box, theme } from "@styles";
 

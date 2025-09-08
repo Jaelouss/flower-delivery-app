@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check .",
-    "format": "biome format --write .",
-    "seed": "tsx src/scripts/seed.ts"
+    "format": "biome format --write ."
   },
   "dependencies": {
     "@a1rth/css-normalize": "^1.2.1",

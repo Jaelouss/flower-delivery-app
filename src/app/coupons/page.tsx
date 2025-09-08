@@ -1,6 +1,6 @@
 "use client";
 
-import { CouponCard } from "@UI";
+import { CouponCard } from "@components";
 import styled from "@emotion/styled";
 import { WarningCircleIcon } from "@phosphor-icons/react";
 import { Box, flexColumn, flexRow, Icon, Text, theme } from "@styles";

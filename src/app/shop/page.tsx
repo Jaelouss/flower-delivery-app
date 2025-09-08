@@ -1,12 +1,13 @@
 "use client";
 
-import { CustomButton, ProductCard, ProductSection } from "@UI";
+import { CustomButton } from "@UI";
 import styled from "@emotion/styled";
 import { useShopStore } from "@store/useShopStore";
 import { flexRow } from "@styles";
 import { useState } from "react";
 import { useFlowers } from "@/lib/api/flowers";
 import { useShops } from "@/lib/api/shops";
+import { ProductCard, ProductSection } from "@components";
 
 export default function Page() {
 	const [page, setPage] = useState(1);
