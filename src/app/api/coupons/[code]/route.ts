@@ -1,15 +1,11 @@
-import { NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import Coupon from "@/lib/models/Coupon";
 import dbConnect from "@/lib/models/connection";
 
-interface Params {
-	code: string;
-}
-
-export async function GET({ params }: { params: Params }) {
+export async function GET(request: NextRequest, context: any) {
 	await dbConnect();
 
-	const { code } = await params;
+	const { code } = context.params;
 
 	try {
 		const coupon = await Coupon.findOne({ code, isActive: true });

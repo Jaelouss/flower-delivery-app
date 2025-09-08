@@ -13,5 +13,4 @@ export {
 	flexRow,
 	type JustifyContent,
 } from "./mixins";
-export { type Theme, theme } from "./theme";
-// export {}from './'
+export { theme } from "./theme";

@@ -1,7 +1,5 @@
 "use client";
 
-import type { Theme as EmotionTheme } from "@emotion/react";
-
 export const theme = {
 	colors: {
 		white: "#fff",
@@ -34,15 +32,3 @@ export const theme = {
 		inter: "'Inter', sans-serif",
 	},
 } as const;
-
-declare module "@emotion/react" {
-	export interface Theme extends EmotionTheme {
-		colors: typeof theme.colors;
-		spacing: typeof theme.spacing;
-		border: typeof theme.border;
-		shadow: typeof theme.shadow;
-		fontFamily: typeof theme.fontFamily;
-	}
-}
-
-export type Theme = typeof theme;

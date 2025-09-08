@@ -1,12 +1,12 @@
-import { NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/models/connection";
 import Order from "@/lib/models/Order";
 
-export async function GET({ params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, context: any) {
 	await dbConnect();
 
 	try {
-		const order = await Order.findOne({ orderId: params.id });
+		const order = await Order.findOne({ orderId: context.params.id });
 
 		if (!order) {
 			return NextResponse.json({ error: "Order not found" }, { status: 404 });
